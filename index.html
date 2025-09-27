@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumpleaños de Princesa</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #FFE4E6, #F8BBD9, #E8A5C7);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        /* SOBRE DELICADO MEJORADO */
+        #envelope {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #FFF0F5 0%, #FCE4EC 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        .envelope-container {
+            position: relative;
+            padding: 60px;
+            background: #FFEEF7;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(219, 112, 147, 0.15);
+        }
+
+        .decorative-flowers {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .flower-branch {
+            width: 100px;
+            height: 40px;
+            opacity: 0.7;
+        }
+
+        .title-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            color: #D63384;
+            font-family: 'Great Vibes', cursive;
+            margin: 0;
+            font-weight: normal;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #B565A7;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 10px 0;
+            font-weight: 300;
+        }
+
+        .envelope-card {
+            width: 280px;
+            height: 200px;
+            position: relative;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .envelope-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .envelope-body {
+            width: 100%;
+            height: 100%;
+            background: #E91E63;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.25);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: #F8BBD9;
+            clip-path: polygon(0 0, 50% 80%, 100% 0);
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(145deg, #FFB6C1 0%, #FF69B4 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+            border: 2px solid #FF1493;
+        }
+
+        .princess-icon {
+            width: 24px;
+            height: 24px;
+            fill: #8B008B;
+        }
+
+        .bottom-flowers {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            opacity: 0.6;
+        }
+
+        .side-flowers {
+            position: absolute;
+            opacity: 0.5;
+        }
+
+        .side-flowers.left {
+            bottom: 20px;
+            left: -40px;
+            transform: rotate(-15deg);
+        }
+
+        .side-flowers.right {
+            bottom: 20px;
+            right: -40px;
+            transform: rotate(15deg);
+        }
+
+        .click-instruction {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 1.1rem;
+            color: #D63384;
+            font-family: 'Great Vibes', cursive;
+            letter-spacing: 1px;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-star {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            opacity: 0.3;
+            animation: gentleFloat 4s ease-in-out infinite;
+        }
+
+        .star-1 {
+            top: 15%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .star-2 {
+            top: 20%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .star-3 {
+            bottom: 25%;
+            left: 25%;
+            animation-delay: 1s;
+        }
+
+        @keyframes gentleFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .delicate-dots {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #E91E63;
+            opacity: 0.6;
+        }
+
+        .dot-1 {
+            top: 25%;
+            left: 30%;
+        }
+
+        .dot-2 {
+            top: 35%;
+            right: 25%;
+        }
+
+        .dot-3 {
+            bottom: 30%;
+            left: 35%;
+        }
+
+        .dot-4 {
+            bottom: 40%;
+            right: 30%;
+        }
+
+        /* INVITACIÓN */
+        .invitation {
+            display: none;
+            width: 350px;
+            background: #FFFFFF;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.15);
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: #FFFFFF;
+            padding: 30px 25px 20px 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .corner-decoration {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.8;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(5deg); }
+        }
+
+        .corner-decoration.top-left {
+            top: 10px;
+            left: 10px;
+            transform: rotate(-20deg);
+        }
+
+        .corner-decoration.top-right {
+            top: 10px;
+            right: 10px;
+            transform: rotate(20deg);
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: 10px;
+            left: 10px;
+            transform: rotate(-160deg);
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            transform: rotate(160deg);
+        }
+
+        .main-illustration {
+            width: 240px;
+            height: 240px;
+            margin: 25px auto;
+            background: url('https://res.cloudinary.com/dl91kein6/image/upload/v1758845045/emmapro_seafk5.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            border: 3px solid #FFFFFF;
+            box-shadow: 0 0 0 3px #FF69B4, 
+                        0 8px 25px rgba(255, 105, 180, 0.3);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .main-illustration:hover {
+            transform: scale(1.03);
+        }
+
+        .hosts-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #8B008B;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .invitation-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9em;
+            color: #B565A7;
+            font-weight: 400;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .invitation .main-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #FF1493, #E91E63, #C2185B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(255, 20, 147, 0.2);
+        }
+
+        .invitation .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85em;
+            color: #B565A7;
+            margin-bottom: 10px;
+        }
+
+        .baby-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2em;
+            color: #FF1493;
+            margin: 15px 0 25px 0;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(255, 20, 147, 0.3);
+            position: relative;
+        }
+
+        .baby-name::after {
+            content: '✨';
+            position: absolute;
+            right: -10px;
+            top: -5px;
+            font-size: 0.4em;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+            50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+        }
+
+        .age-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2em;
+            color: #E91E63;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .countdown-container {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em;
+            color: #D63384;
+            margin-top: 10px;
+        }
+
+        .countdown-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .countdown-timer {
+            font-weight: 400;
+        }
+
+        .event-details {
+            text-align: left;
+            padding: 0 25px;
+            margin-bottom: 25px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #8B008B;
+            min-width: 70px;
+            flex-shrink: 0;
+        }
+
+        .detail-value {
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .venue-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3em;
+            color: #FF69B4;
+            text-align: center;
+            margin: 20px 0 10px 0;
+        }
+
+        .map-button {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 25px auto;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #FF69B4, #E91E63);
+            color: white;
+            font-size: 1em;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(233, 30, 99, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .map-button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #E91E63, #C2185B);
+        }
+
+        .bottom-decoration {
+            padding: 25px;
+            text-align: center;
+            background: rgba(255, 20, 147, 0.03);
+            border-top: 2px solid rgba(255, 105, 180, 0.15);
+            position: relative;
+        }
+
+        .bottom-decoration::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FF69B4, transparent);
+        }
+
+        .rsvp-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3em;
+            color: #8B008B;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .rsvp-details {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .quote {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1em;
+            color: #999;
+            font-style: italic;
+        }
+
+        .signature {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75em;
+            color: #aaa;
+            text-align: center;
+            padding: 10px;
+            border-top: 1px dashed rgba(0, 0, 0, 0.1);
+            background: #fafafa;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SOBRE DELICADO -->
+    <div id="envelope">
+        <div class="envelope-container">
+            <div class="decorative-flowers">
+                <svg class="flower-branch" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10,30 Q15,15 25,20 Q35,10 45,25" stroke="#F8BBD9" stroke-width="2" fill="none" />
+                    <circle cx="15" cy="25" r="6" fill="#FFB6C1" opacity="0.6" />
+                    <circle cx="25" cy="18" r="5" fill="#FF69B4" opacity="0.7" />
+                    <circle cx="35" cy="22" r="4" fill="#E91E63" opacity="0.5" />
+                    <path d="M55,30 Q60,15 70,20 Q80,10 90,25" stroke="#F8BBD9" stroke-width="2" fill="none" />
+                    <circle cx="65" cy="25" r="6" fill="#FFB6C1" opacity="0.6" />
+                    <circle cx="75" cy="18" r="5" fill="#FF69B4" opacity="0.7" />
+                    <circle cx="85" cy="22" r="4" fill="#E91E63" opacity="0.5" />
+                </svg>
+            </div>
+
+            <div class="title-section">
+                <h1 class="main-title">Zayra</h1>
+                <p class="subtitle">Cumpleaños de Princesa</p>
+            </div>
+
+            <div class="floating-elements">
+                <svg class="floating-star star-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#F8BBD9" />
+                </svg>
+                <svg class="floating-star star-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#FF69B4" />
+                </svg>
+                <svg class="floating-star star-3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#E91E63" />
+                </svg>
+
+                <div class="delicate-dots dot-1"></div>
+                <div class="delicate-dots dot-2"></div>
+                <div class="delicate-dots dot-3"></div>
+                <div class="delicate-dots dot-4"></div>
+            </div>
+
+            <div class="envelope-card" id="openEnvelope">
+                <div class="envelope-body"></div>
+                <div class="envelope-flap"></div>
+                <div class="wax-seal">
+                    <svg class="princess-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    
+                    </svg>
+                </div>
+            </div>
+
+            <div class="bottom-flowers">
+                <svg width="60" height="20" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="8" fill="#FFB6C1" opacity="0.4" />
+                    <circle cx="20" cy="12" r="6" fill="#FF69B4" opacity="0.5" />
+                    <circle cx="30" cy="8" r="7" fill="#E91E63" opacity="0.3" />
+                    <circle cx="40" cy="12" r="6" fill="#FF69B4" opacity="0.5" />
+                    <circle cx="50" cy="10" r="8" fill="#FFB6C1" opacity="0.4" />
+                </svg>
+            </div>
+
+            <div class="side-flowers left">
+                <svg width="40" height="60" viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10,10 Q15,5 20,15 Q25,5 30,10" stroke="#F8BBD9" stroke-width="2" fill="none" />
+                    <circle cx="15" cy="12" r="5" fill="#FFB6C1" opacity="0.4" />
+                    <circle cx="25" cy="12" r="5" fill="#FF69B4" opacity="0.3" />
+                </svg>
+            </div>
+
+            <div class="side-flowers right">
+                <svg width="40" height="60" viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10,10 Q15,5 20,15 Q25,5 30,10" stroke="#F8BBD9" stroke-width="2" fill="none" />
+                    <circle cx="15" cy="12" r="5" fill="#FFB6C1" opacity="0.4" />
+                    <circle cx="25" cy="12" r="5" fill="#FF69B4" opacity="0.3" />
+                </svg>
+            </div>
+
+            <p class="click-instruction">Presiona el sobre para abrirlo</p>
+        </div>
+    </div>
+
+    <!-- INVITACIÓN -->
+    <div class="invitation">
+        <div class="header">
+            <div class="corner-decorations">
+                <div class="corner-decoration top-left">⭐</div>
+                <div class="corner-decoration top-right">👑</div>
+                <div class="corner-decoration bottom-left">🎈</div>
+                <div class="corner-decoration bottom-right">🦄</div>
+            </div>
+            <div class="invitation-text">Estás invitado/a a</div>
+            <div class="invitation-text">celebrar mi</div>
+            <div class="main-illustration"></div>
+
+            <h1 class="main-title">Cumpleaños</h1>
+            <h2 class="baby-name">Zayra</h2>
+            <div class="age-text">¡Cumple 9 años!</div>
+
+            <!-- NUEVO BLOQUE DE CUENTA REGRESIVA -->
+            <div class="countdown-container">
+                <div class="countdown-title">Falta</div>
+                <div class="countdown-timer" id="countdown">Calculando...</div>
+            </div>
+        </div>
+
+        <div class="event-details">
+            <div class="detail-item">
+                <span class="detail-label">Fecha:</span>
+                <span class="detail-value" id="event-date">Viernes, 7 de Noviembre de 2025</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Ubicación:</span>
+                <span class="detail-value">Ciudad de México</span>
+            </div>
+        </div>
+        <div class="venue-name">CASA DE LOS PAPAS</div>
+        <a href="https://www.google.com/maps?q=19.4326,-99.1332" target="_blank" class="map-button">📍 Ver Ubicación</a>
+        
+        <div class="bottom-decoration">
+            <div class="rsvp-text">Confirmale a mi mamá tu asistencia</div>
+            <div class="rsvp-details">
+                Por favor confirma tu asistencia vía <a
+                    href="https://wa.me/525512345678?text=Hola,%20confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Isabella"
+                    target="_blank">WhatsApp</a>
+            </div>
+            <div class="quote">"Será una fiesta mágica llena de diversión y alegría"</div>
+        </div>
+        <div class="signature">Created by Gabriel Jrz<br>&copy; 2025 All Rights Reserved</div>
+    </div>
+
+    <script>
+        // Abrir sobre delicado
+        const openBtn = document.getElementById('openEnvelope');
+        const envelope = document.getElementById('envelope');
+        const invitation = document.querySelector('.invitation');
+
+        openBtn.addEventListener('click', () => {
+            envelope.style.opacity = '0';
+            envelope.style.transform = 'scale(0.9)';
+            envelope.style.transition = 'all 0.6s ease';
+
+            setTimeout(() => {
+                envelope.style.display = 'none';
+                invitation.style.display = 'block';
+            }, 600);
+        });
+
+        openBtn.addEventListener('mouseenter', function () {
+            this.style.transform = 'translateY(-8px)';
+            this.style.transition = 'all 0.3s ease';
+        });
+
+        openBtn.addEventListener('mouseleave', function () {
+            this.style.transform = 'translateY(0)';
+        });
+
+        // Cuenta regresiva
+        const eventDate = new Date('2025-11-07T15:00:00');
+        function updateCountdown() {
+            const now = new Date();
+            const diff = eventDate - now;
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = "¡La fiesta ha comenzado!";
+                clearInterval(timer);
+                return;
+            }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+            document.getElementById('countdown').innerHTML = `${days} días, ${hours} h, ${minutes} m, ${seconds} s`;
+        }
+        updateCountdown();
+        const timer = setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+
+</html>
