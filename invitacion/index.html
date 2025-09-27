@@ -213,9 +213,12 @@
         }
 
         @keyframes gentleFloat {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px);
             }
+
             50% {
                 transform: translateY(-8px);
             }
@@ -267,6 +270,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -293,8 +297,15 @@
         }
 
         @keyframes floatIcon {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-5px) rotate(5deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(5deg);
+            }
         }
 
         .corner-decoration.top-left {
@@ -329,8 +340,8 @@
             background-size: cover;
             border-radius: 50%;
             border: 3px solid #FFFFFF;
-            box-shadow: 0 0 0 3px #FF69B4, 
-                        0 8px 25px rgba(255, 105, 180, 0.3);
+            box-shadow: 0 0 0 3px #FF69B4,
+                0 8px 25px rgba(255, 105, 180, 0.3);
             position: relative;
             z-index: 2;
             overflow: hidden;
@@ -381,26 +392,60 @@
 
         .baby-name {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.2em;
+            font-size: 3.5em;
             color: #FF1493;
             margin: 15px 0 25px 0;
             line-height: 1.2;
             text-shadow: 0 2px 8px rgba(255, 20, 147, 0.3);
             position: relative;
         }
+        .babynom{
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2em;
+            color: #FF1493;
+            margin: 15px 0 25px 0;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(255, 20, 147, 0.3);
+            position: relative;
 
-        .baby-name::after {
-            content: '✨';
-            position: absolute;
-            right: -10px;
-            top: -5px;
-            font-size: 0.4em;
-            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .baby-name.number-nine {
+            animation: bounceGlow 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes bounceGlow {
+            0%, 100% {
+                transform: scale(1) translateY(0px);
+                text-shadow: 0 2px 8px rgba(255, 20, 147, 0.3);
+            }
+            25% {
+                transform: scale(1.05) translateY(-3px);
+                text-shadow: 0 4px 15px rgba(255, 20, 147, 0.6);
+            }
+            50% {
+                transform: scale(1.1) translateY(-5px);
+                text-shadow: 0 6px 20px rgba(255, 20, 147, 0.8);
+            }
+            75% {
+                transform: scale(1.05) translateY(-3px);
+                text-shadow: 0 4px 15px rgba(255, 20, 147, 0.6);
+            }
         }
 
         @keyframes sparkle {
-            0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
-            50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(1) rotate(0deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(180deg);
+            }
         }
 
         .age-text {
@@ -533,6 +578,48 @@
             background: #fafafa;
             line-height: 1.2;
         }
+
+        /* ANIMACIÓN DE CONFETI */
+        .celebration-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10000;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FF69B4;
+            animation: fallConfetti 4s linear forwards;
+            top: -20px;
+        }
+
+        @keyframes fallConfetti {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti.red { background: #FF1493; }
+        .confetti.blue { background: #4169E1; }
+        .confetti.green { background: #32CD32; }
+        .confetti.yellow { background: #FFD700; }
+        .confetti.purple { background: #9370DB; }
+        .confetti.orange { background: #FF8C00; }
     </style>
 </head>
 
@@ -556,18 +643,23 @@
 
             <div class="title-section">
                 <h1 class="main-title">Zayra</h1>
-                <p class="subtitle">Cumpleaños de Princesa</p>
             </div>
 
             <div class="floating-elements">
                 <svg class="floating-star star-1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#F8BBD9" />
+                    <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                        fill="#F8BBD9" />
                 </svg>
                 <svg class="floating-star star-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#FF69B4" />
+                    <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                        fill="#FF69B4" />
                 </svg>
                 <svg class="floating-star star-3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#E91E63" />
+                    <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                        fill="#E91E63" />
                 </svg>
 
                 <div class="delicate-dots dot-1"></div>
@@ -581,7 +673,7 @@
                 <div class="envelope-flap"></div>
                 <div class="wax-seal">
                     <svg class="princess-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    
+
                     </svg>
                 </div>
             </div>
@@ -630,8 +722,9 @@
             <div class="main-illustration"></div>
 
             <h1 class="main-title">Cumpleaños</h1>
-            <h2 class="baby-name">Zayra</h2>
-            <div class="age-text">¡Cumple 9 años!</div>
+            <h2 class="baby-name number-nine">9</h2>
+            <h2 class="babynom">Zayra</h2>
+
 
             <!-- NUEVO BLOQUE DE CUENTA REGRESIVA -->
             <div class="countdown-container">
@@ -652,7 +745,7 @@
         </div>
         <div class="venue-name">CASA DE LOS PAPAS</div>
         <a href="https://www.google.com/maps?q=19.4326,-99.1332" target="_blank" class="map-button">📍 Ver Ubicación</a>
-        
+
         <div class="bottom-decoration">
             <div class="rsvp-text">Confirmale a mi mamá tu asistencia</div>
             <div class="rsvp-details">
@@ -665,11 +758,14 @@
         <div class="signature">Created by Gabriel Jrz<br>&copy; 2025 All Rights Reserved</div>
     </div>
 
+    <div class="celebration-container" id="celebration" style="display: none;"></div>
+
     <script>
         // Abrir sobre delicado
         const openBtn = document.getElementById('openEnvelope');
         const envelope = document.getElementById('envelope');
         const invitation = document.querySelector('.invitation');
+        const celebration = document.getElementById('celebration');
 
         openBtn.addEventListener('click', () => {
             envelope.style.opacity = '0';
@@ -679,6 +775,9 @@
             setTimeout(() => {
                 envelope.style.display = 'none';
                 invitation.style.display = 'block';
+                
+                // Activar celebración
+                startCelebration();
             }, 600);
         });
 
@@ -690,6 +789,61 @@
         openBtn.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0)';
         });
+
+        // Función de celebración con confeti y globos
+        function startCelebration() {
+            celebration.style.display = 'block';
+            
+            // Crear confeti
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createConfetti();
+                }, i * 100);
+            }
+            
+            // Crear globos
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createBalloon();
+                }, i * 200);
+            }
+            
+            // Limpiar después de 5 segundos
+            setTimeout(() => {
+                celebration.style.display = 'none';
+                celebration.innerHTML = '';
+            }, 5000);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            
+            const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.classList.add(randomColor);
+            
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            
+            celebration.appendChild(confetti);
+        }
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            
+            const colors = ['pink', 'purple', 'yellow'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            balloon.classList.add(randomColor);
+            
+            balloon.style.left = Math.random() * 100 + '%';
+            balloon.style.animationDelay = Math.random() * 1 + 's';
+            balloon.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            
+            celebration.appendChild(balloon);
+        }
 
         // Cuenta regresiva
         const eventDate = new Date('2025-11-07T15:00:00');
