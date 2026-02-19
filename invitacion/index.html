@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cumpleaños de zai</title>
+    <title>Invitación de cumpleaños de Zaira</title>
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap');
@@ -95,6 +95,9 @@
             margin: 0 auto;
             cursor: pointer;
             transition: all 0.3s ease;
+            border: none;
+            background: transparent;
+            padding: 0;
         }
 
         .envelope-card:hover {
@@ -400,7 +403,7 @@
             text-shadow: 0 2px 8px rgba(255, 20, 147, 0.3);
             position: relative;
         }
-        .babynom{
+        .birthday-name {
             font-family: 'Great Vibes', cursive;
             font-size: 2.2em;
             color: #FF1493;
@@ -621,6 +624,38 @@
         .confetti.yellow { background: #FFD700; }
         .confetti.purple { background: #9370DB; }
         .confetti.orange { background: #FF8C00; }
+
+        .balloon {
+            position: absolute;
+            bottom: -80px;
+            width: 34px;
+            height: 46px;
+            border-radius: 50% 50% 45% 45%;
+            opacity: 0.85;
+            animation: riseBalloon 4.5s ease-in forwards;
+            box-shadow: inset -6px -8px 12px rgba(255, 255, 255, 0.25);
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            width: 2px;
+            height: 16px;
+            background: rgba(107, 114, 128, 0.75);
+            transform: translateX(-50%);
+        }
+
+        .balloon.pink { background: linear-gradient(145deg, #FF69B4, #EC4899); }
+        .balloon.purple { background: linear-gradient(145deg, #C084FC, #A855F7); }
+        .balloon.yellow { background: linear-gradient(145deg, #FDE047, #F59E0B); }
+
+        @keyframes riseBalloon {
+            0% { transform: translateY(0) scale(0.9); opacity: 0; }
+            15% { opacity: 0.85; }
+            100% { transform: translateY(-110vh) translateX(20px) scale(1.05); opacity: 0; }
+        }
     </style>
 </head>
 
@@ -669,7 +704,7 @@
                 <div class="delicate-dots dot-4"></div>
             </div>
 
-            <div class="envelope-card" id="openEnvelope">
+            <button class="envelope-card" id="openEnvelope" type="button" aria-label="Abrir invitación">
                 <div class="envelope-body"></div>
                 <div class="envelope-flap"></div>
                 <div class="wax-seal">
@@ -677,7 +712,7 @@
 
                     </svg>
                 </div>
-            </div>
+            </button>
 
             <div class="bottom-flowers">
                 <svg width="60" height="20" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg">
@@ -724,7 +759,7 @@
 
             <h1 class="main-title">Cumpleaños</h1>
             <h2 class="baby-name number-nine">9</h2>
-            <h2 class="babynom">Zaira</h2>
+            <h2 class="birthday-name">Zaira</h2>
 
 
             <!-- NUEVO BLOQUE DE CUENTA REGRESIVA -->
@@ -762,7 +797,7 @@
         <a href="https://www.google.com/maps?q=19.6797735,-99.105176" target="_blank" class="map-button">📍 Ver Ubicación</a>
 
         <div class="bottom-decoration">
-            <div class="rsvp-text">Confirmale a mi mamá tu asistencia</div>
+            <div class="rsvp-text">Confírmale a mi mamá tu asistencia</div>
             <div class="rsvp-details">
                 Por favor confirma tu asistencia vía <a
                     href="https://wa.me/525627705786?text=Hola,%20confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Zay"
@@ -781,6 +816,11 @@
         const envelope = document.getElementById('envelope');
         const invitation = document.querySelector('.invitation');
         const celebration = document.getElementById('celebration');
+        const countdownEl = document.getElementById('countdown');
+
+        if (!openBtn || !envelope || !invitation || !celebration || !countdownEl) {
+            throw new Error('No se encontraron los elementos principales de la invitación.');
+        }
 
         openBtn.addEventListener('click', () => {
             envelope.style.opacity = '0';
@@ -866,7 +906,7 @@
             const now = new Date();
             const diff = eventDate - now;
             if (diff <= 0) {
-                document.getElementById('countdown').innerHTML = "¡La fiesta ha comenzado!";
+                countdownEl.textContent = '¡La fiesta ha comenzado!';
                 clearInterval(timer);
                 return;
             }
@@ -874,7 +914,7 @@
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((diff / (1000 * 60)) % 60);
             const seconds = Math.floor((diff / 1000) % 60);
-            document.getElementById('countdown').innerHTML = `${days} días, ${hours} h, ${minutes} m, ${seconds} s`;
+            countdownEl.textContent = `${days} días, ${hours} h, ${minutes} m, ${seconds} s`;
         }
         updateCountdown();
         const timer = setInterval(updateCountdown, 1000);
